@@ -1,4 +1,6 @@
-﻿namespace WindowsFormsApp1
+﻿using Microsoft.Office.Interop.Excel;
+
+namespace WindowsFormsApp1
 {
     partial class Form1
     {
@@ -32,6 +34,21 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Text = "Form1";
+
+            // create new excel application through interop
+            Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
+            // create new workbook
+            Workbook workbook = excelApp.Workbooks.Add();
+            // create new worksheet
+            Worksheet worksheet = workbook.Worksheets.Add();
+            // set cell value
+            worksheet.Cells[1, 1] = "Hello World!";
+            // save workbook
+            workbook.SaveAs("C:\\Users\\user\\Desktop\\test.xlsx");
+            // close workbook
+            workbook.Close();
+            // close excel application
+            excelApp.Quit();
         }
 
         #endregion
